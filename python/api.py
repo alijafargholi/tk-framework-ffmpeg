@@ -1,6 +1,13 @@
 import os
+import shutil
 
 import ffmpeg
+import sgtk
+
+LOGGER = sgtk.platform.get_logger(__name__)
+
+if not shutil.which("ffmpeg"):
+    raise OSError("ffmpeg is not installed.")
 
 
 class FFmpegAPI:
@@ -60,9 +67,9 @@ class FFmpegAPI:
                 .output(output_path, vframes=1)
                 .run(overwrite_output=True)
             )
-            print(f"Thumbnail generated successfully: {output_path}")
+            LOGGER.debug(f"Thumbnail generated successfully: {output_path}")
         except Exception as error:
-            print(f"Error generating thumbnail: {error}")
+            LOGGER.error(f"Error generating thumbnail: {error}")
 
     def clip_video(
         self,
@@ -96,9 +103,9 @@ class FFmpegAPI:
                 strict="experimental",
             ).run(overwrite_output=True)
 
-            print(f"Clip saved to: {output_path}")
+            LOGGER.debug(f"Clip saved to: {output_path}")
         except ffmpeg.Error as e:
-            print(f"Error during clip extraction: {e.stderr.decode()}")
+            LOGGER.error(f"Error during clip extraction: {e.stderr.decode()}")
 
     @staticmethod
     def get_video_fps(video_file: str) -> float | None:
@@ -119,5 +126,5 @@ class FFmpegAPI:
                     num, denom = map(int, fps_str.split("/"))
                     return num / denom
         except Exception as e:
-            print(f"Error retrieving FPS: {e}")
+            LOGGER.error(f"Error retrieving FPS: {e}")
             return None

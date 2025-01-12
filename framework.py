@@ -29,14 +29,14 @@ def patch_environment():
 
     vendor_path = get_vendors_path()
 
+    logger.debug(f"Adding {vendor_path} to the python path")
     if vendor_path not in sys.path:
-        logger.debug(f"Adding {vendor_path} to the python path")
         sys.path.insert(0, vendor_path)
 
     bin_path = os.path.join(vendor_path, "bin")
-    os.environ["PATH"] = bin_path + os.pathsep + os.environ["PATH"]
-
     logger.debug(f"Adding {bin_path} to the path")
+    if bin_path not in os.environ["PATH"]:
+        sgtk.util.append_path_to_env_var("PATH", bin_path)
 
 
 def unpatch_environment():
@@ -45,7 +45,14 @@ def unpatch_environment():
     """
     vendor_path = get_vendors_path()
     if vendor_path in sys.path:
-        sys.path.remove(get_vendors_path())
+        sys.path.remove(vendor_path)
+
+    # Remove vendor_path from PATH environment variable
+    bin_path = os.path.join(vendor_path, "bin")
+    path_elements = os.environ["PATH"].split(os.pathsep)
+    if bin_path in path_elements:
+        path_elements.remove(bin_path)
+        os.environ["PATH"] = os.pathsep.join(path_elements)
 
 
 class FfmpegFramework(sgtk.platform.Framework):
