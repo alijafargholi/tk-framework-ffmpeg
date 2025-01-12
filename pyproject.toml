@@ -1,0 +1,69 @@
+[project]
+name = "tk-framework-ffmpeg"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "ffmpeg-python>=0.2.0",
+]
+
+[tool.ruff]
+# C4: Unnecessary comprehension
+# SIM: Simplification
+# TCH: Type check
+# F401: Unused imports
+# E501: Line too long
+# E502: Redundant-backslash
+# UP032: Checks for str.format calls that can be replaced with f-strings
+# I0: Unsorted-imports or Missing required import
+# N8: PEP8 naming
+lint.extend-select = ["C4", "SIM", "TCH", "F401", "E5", "UP032", "I0", "N8",
+    "UP", "RUF"]
+lint.extend-ignore = ["SIM115"]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    "vendor",
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    "vendor",
+]
+
+# Same as Black.
+line-length = 79
+indent-width = 4
+
+# Assume Python 3.10
+target-version = "py310"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.8.3",
+    "pre-commit>=4.0.1",
+]

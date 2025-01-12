@@ -1,0 +1,6 @@
+vendor/bin/futurize filter=lfs diff=lfs merge=lfs -text
+vendor/bin/pasteurize filter=lfs diff=lfs merge=lfs -text
+vendor/bin/ffmpeg filter=lfs diff=lfs merge=lfs -text
+vendor/bin/ffmpeg.exe filter=lfs diff=lfs merge=lfs -text
+vendor/bin/ffprobe filter=lfs diff=lfs merge=lfs -text
+vendor/bin/ffprobe.exe filter=lfs diff=lfs merge=lfs -text

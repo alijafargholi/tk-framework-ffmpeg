@@ -1,0 +1,22 @@
+# Metadata defining the behavior and requirements for this framework
+
+# expected fields in the configuration file for this engine
+configuration:
+
+# the Shotgun fields that this engine needs in order to operate correctly
+requires_shotgun_fields:
+
+# More verbose description of this item
+display_name: "FFMPEG Framework"
+description: "A ShotGrid Toolkit framework that provides ffmpeg capabilities via python-ffmpeg."
+
+# Required minimum versions for this item to run
+requires_shotgun_version:
+
+requires_core_version: "v0.21.4"
+
+version: "v0.1.0"
+icon: "icon_256.png"
+
+#documentation_url: "https://yourdocurl.com"
+#support_url: "https://yourdocurl.com/support"
